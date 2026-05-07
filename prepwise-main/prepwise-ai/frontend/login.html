@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - PrepWise AI</title>
+  <style>
+    body {
+      background: #050520;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #111133;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: #7c5cff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>PrepWise AI Login</h1>
+
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script>
+    function login() {
+      alert("Login Successful!");
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup - PrepWise AI</title>
+  <style>
+    body {
+      background: #050520;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #111133;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: #ff4fd8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Create Account</h1>
+
+    <input type="text" placeholder="Full Name" />
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+
+    <select>
+      <option>Candidate</option>
+      <option>Recruiter</option>
+    </select>
+
+    <button onclick="signup()">Signup</button>
+  </div>
+
+  <script>
+    function signup() {
+      alert("Signup Successful!");
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>

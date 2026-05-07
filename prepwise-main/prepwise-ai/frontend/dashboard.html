@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+      background: #050520;
+      color: white;
+      font-family: Arial;
+      padding: 40px;
+    }
+
+    .card {
+      background: #111133;
+      padding: 25px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #7c5cff;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>PrepWise AI Dashboard</h1>
+
+  <div class="card">
+    <h2>Resume Analysis</h2>
+    <p>Resume uploaded successfully.</p>
+    <button onclick="alert('Skills Extracted: Python, SQL, FastAPI, HTML, CSS')">
+      Analyze Resume
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>Mock Interview</h2>
+    <p>AI interview simulation with scoring.</p>
+    <button onclick="window.location.href='interview.html'">
+      Start Interview
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>Recruiter Dashboard</h2>
+    <button onclick="window.location.href='recruiter.html'">
+      Open Recruiter Panel
+    </button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+alembic
+pydantic[email]
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pdfplumber
+spacy
+sentence-transformers
+scikit-learn
+httpx
+anthropic
+python-dotenv
+aiofiles

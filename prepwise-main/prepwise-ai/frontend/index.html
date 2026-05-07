@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PrepWise AI</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#07072d;
+            color:white;
+        }
+
+        nav{
+            background:#11113b;
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav h1{
+            margin:0;
+        }
+
+        .nav-buttons button{
+            background:#8b5cf6;
+            border:none;
+            padding:10px 18px;
+            color:white;
+            border-radius:8px;
+            margin-left:10px;
+            cursor:pointer;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .section{
+            background:#11113b;
+            padding:25px;
+            border-radius:15px;
+            margin-bottom:30px;
+        }
+
+        h2{
+            margin-top:0;
+        }
+
+        button{
+            background:#8b5cf6;
+            border:none;
+            padding:12px 20px;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+
+        textarea{
+            width:100%;
+            height:120px;
+            border-radius:10px;
+            padding:10px;
+            margin-top:10px;
+        }
+
+        select{
+            padding:10px;
+            border-radius:8px;
+        }
+
+        .question-box{
+            background:#23235d;
+            padding:15px;
+            border-radius:10px;
+            margin-top:15px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        table, th, td{
+            border:1px solid #444;
+        }
+
+        th, td{
+            padding:12px;
+            text-align:left;
+        }
+
+        .graph-container{
+            margin-top:20px;
+        }
+
+        .bar{
+            margin-bottom:20px;
+        }
+
+        .bar label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+        }
+
+        .progress{
+            width:100%;
+            background:#2a2a5a;
+            border-radius:10px;
+            overflow:hidden;
+            height:30px;
+        }
+
+        .progress-fill{
+            height:100%;
+            background:linear-gradient(90deg,#7b5cff,#a855f7);
+            text-align:center;
+            line-height:30px;
+            color:white;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <h1>PrepWise AI</h1>
+
+        <div class="nav-buttons">
+
+            <button onclick="showCandidate()">
+                Candidate
+            </button>
+
+            <button onclick="showRecruiter()">
+                Recruiter
+            </button>
+
+        </div>
+
+    </nav>
+
+    <!-- CANDIDATE SECTION -->
+
+    <div class="container" id="candidateSection">
+
+        <!-- INTRO -->
+
+        <div class="section">
+
+            <h1>
+                Know Your Real Skill Level Before the Interview
+            </h1>
+
+            <p>
+
+                AI-powered platform for resume analysis,
+                job description matching,
+                adaptive interviews,
+                coding tests,
+                automated candidate scoring,
+                and recruiter analytics.
+
+            </p>
+
+        </div>
+
+        <!-- RESUME -->
+
+        <div class="section">
+
+            <h2>1. Upload Resume</h2>
+
+            <input type="file" id="resume">
+
+            <br>
+
+            <button onclick="analyzeResume()">
+                Analyze Resume
+            </button>
+
+            <h3 id="skills"></h3>
+
+        </div>
+
+        <!-- JOB DESCRIPTION -->
+
+        <div class="section">
+
+            <h2>2. Job Description Matching</h2>
+
+            <textarea
+                id="jobDescription"
+                placeholder="Paste Job Description here..."
+            ></textarea>
+
+            <br>
+
+            <button onclick="matchJobDescription()">
+                Match Resume with JD
+            </button>
+
+            <h3 id="matchResult"></h3>
+
+            <div id="missingSkills"></div>
+
+        </div>
+
+        <!-- AI INTERVIEW -->
+
+        <div class="section">
+
+            <h2>3. AI Mock Interview</h2>
+
+            <select id="difficulty">
+
+                <option>Beginner</option>
+                <option>Medium</option>
+                <option>Expert</option>
+
+            </select>
+
+            <br>
+
+            <button onclick="generateQuestions()">
+                Generate Questions
+            </button>
+
+            <div id="questions"></div>
+
+        </div>
+
+        <!-- ANSWER -->
+
+        <div class="section">
+
+            <h2>4. Submit Interview Answer</h2>
+
+            <textarea
+                id="answer"
+                placeholder="Type your answer here..."
+            ></textarea>
+
+            <br>
+
+            <button onclick="evaluateAnswer()">
+                Evaluate Answer
+            </button>
+
+            <h3 id="score"></h3>
+
+        </div>
+
+        <!-- CODING TEST -->
+
+        <div class="section">
+
+            <h2>5. Online Coding Skill Test</h2>
+
+            <select id="codingDifficulty">
+
+                <option>Beginner</option>
+                <option>Medium</option>
+                <option>Expert</option>
+
+            </select>
+
+            <br>
+
+            <button onclick="generateCodingQuestion()">
+                Start Coding Test
+            </button>
+
+            <div id="codingQuestion"></div>
+
+            <textarea
+                placeholder="Write your code here..."
+            ></textarea>
+
+            <br>
+
+            <button onclick="submitCodingTest()">
+                Submit Coding Test
+            </button>
+
+        </div>
+
+        <!-- ANALYTICS -->
+
+        <div class="section">
+
+            <h2>6. Interview Performance Analytics</h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Skill Area</th>
+                    <th>Performance</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Technical Skills</td>
+                    <td>88%</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Communication</td>
+                    <td>79%</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Problem Solving</td>
+                    <td>91%</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Confidence</td>
+                    <td>83%</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- GRAPH -->
+
+        <div class="section">
+
+            <h2>7. Performance Graph</h2>
+
+            <div class="graph-container">
+
+                <div class="bar">
+
+                    <label>Technical Skills</label>
+
+                    <div class="progress">
+
+                        <div class="progress-fill"
+                            style="width:88%">
+
+                            88%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="bar">
+
+                    <label>Communication</label>
+
+                    <div class="progress">
+
+                        <div class="progress-fill"
+                            style="width:79%">
+
+                            79%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="bar">
+
+                    <label>Problem Solving</label>
+
+                    <div class="progress">
+
+                        <div class="progress-fill"
+                            style="width:91%">
+
+                            91%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="bar">
+
+                    <label>Confidence</label>
+
+                    <div class="progress">
+
+                        <div class="progress-fill"
+                            style="width:83%">
+
+                            83%
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RECRUITER SECTION -->
+
+    <div
+        class="container"
+        id="recruiterSection"
+        style="display:none;"
+    >
+
+        <div class="section">
+
+            <h2>Recruiter Dashboard</h2>
+
+            <table>
+
+                <tr>
+
+                    <th>Candidate</th>
+                    <th>Skill Match</th>
+                    <th>Status</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Rahul</td>
+                    <td>88%</td>
+                    <td>Shortlisted</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Ananya</td>
+                    <td>76%</td>
+                    <td>Interview Pending</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Kiran</td>
+                    <td>92%</td>
+                    <td>Selected</td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let extractedSkills = [];
+
+        function analyzeResume(){
+
+            extractedSkills = [
+
+                "Python",
+                "SQL",
+                "DBMS",
+                "FastAPI",
+                "Machine Learning"
+
+            ];
+
+            document.getElementById("skills").innerHTML =
+
+                "Skills Extracted: " +
+
+                extractedSkills.join(", ");
+        }
+
+        function matchJobDescription(){
+
+            const jd =
+                document.getElementById("jobDescription")
+                .value
+                .toLowerCase();
+
+            if(extractedSkills.length === 0){
+
+                alert("Please analyze resume first!");
+
+                return;
+            }
+
+            let matched = 0;
+
+            let missing = [];
+
+            extractedSkills.forEach(skill => {
+
+                if(jd.includes(skill.toLowerCase())){
+
+                    matched++;
+
+                }
+            });
+
+            const requiredSkills = [
+
+                "Python",
+                "SQL",
+                "DBMS",
+                "FastAPI",
+                "Machine Learning",
+                "Java",
+                "React"
+
+            ];
+
+            requiredSkills.forEach(skill => {
+
+                if(
+                    jd.includes(skill.toLowerCase()) &&
+                    !extractedSkills.includes(skill)
+                ){
+
+                    missing.push(skill);
+                }
+            });
+
+            let percentage =
+                Math.floor(
+                    (matched / extractedSkills.length) * 100
+                );
+
+            document.getElementById("matchResult")
+                .innerHTML =
+
+                "Resume Match Percentage: " +
+
+                percentage + "%";
+
+            document.getElementById("missingSkills")
+                .innerHTML =
+
+                "<b>Missing Skills:</b> " +
+
+                (missing.length > 0
+                    ? missing.join(", ")
+                    : "No major missing skills");
+        }
+
+        function generateQuestions(){
+
+            let difficulty =
+                document.getElementById("difficulty").value;
+
+            let questionDiv =
+                document.getElementById("questions");
+
+            questionDiv.innerHTML = "";
+
+            extractedSkills.forEach(skill => {
+
+                let question = "";
+
+                if(difficulty === "Beginner"){
+
+                    question =
+                    `What is ${skill} and where is it used?`;
+
+                }
+
+                else if(difficulty === "Medium"){
+
+                    question =
+                    `Explain a real-world use case of ${skill}.`;
+
+                }
+
+                else{
+
+                    question =
+                    `Explain advanced concepts and challenges in ${skill}.`;
+
+                }
+
+                questionDiv.innerHTML += `
+
+                    <div class="question-box">
+
+                        <h3>
+                            ${difficulty} Question on ${skill}
+                        </h3>
+
+                        <p>${question}</p>
+
+                    </div>
+
+                `;
+            });
+        }
+
+        function evaluateAnswer(){
+
+            let answer =
+                document.getElementById("answer").value;
+
+            let score = 0;
+
+            if(answer.length > 20){
+
+                score = 85;
+
+            }
+
+            else{
+
+                score = 55;
+
+            }
+
+            document.getElementById("score")
+                .innerHTML =
+
+                "Candidate Score: " +
+
+                score + "%";
+        }
+
+        function generateCodingQuestion(){
+
+            let level =
+                document.getElementById("codingDifficulty")
+                .value;
+
+            let codingQuestion =
+                document.getElementById("codingQuestion");
+
+            if(level === "Beginner"){
+
+                codingQuestion.innerHTML =
+
+                `
+                <div class="question-box">
+
+                    <h3>Beginner Coding Question</h3>
+
+                    <p>
+                        Write a program to reverse a string.
+                    </p>
+
+                </div>
+                `;
+            }
+
+            else if(level === "Medium"){
+
+                codingQuestion.innerHTML =
+
+                `
+                <div class="question-box">
+
+                    <h3>Medium Coding Question</h3>
+
+                    <p>
+                        Write a program to find duplicate
+                        elements in an array.
+                    </p>
+
+                </div>
+                `;
+            }
+
+            else{
+
+                codingQuestion.innerHTML =
+
+                `
+                <div class="question-box">
+
+                    <h3>Expert Coding Question</h3>
+
+                    <p>
+                        Implement Dijkstra's Algorithm.
+                    </p>
+
+                </div>
+                `;
+            }
+        }
+
+        function submitCodingTest(){
+
+            alert(
+                "Coding Test Submitted Successfully!"
+            );
+        }
+
+        function showRecruiter(){
+
+            document.getElementById(
+                "candidateSection"
+            ).style.display = "none";
+
+            document.getElementById(
+                "recruiterSection"
+            ).style.display = "block";
+        }
+
+        function showCandidate(){
+
+            document.getElementById(
+                "candidateSection"
+            ).style.display = "block";
+
+            document.getElementById(
+                "recruiterSection"
+            ).style.display = "none";
+        }
+
+    </script>
+
+</body>
+
+</html>
