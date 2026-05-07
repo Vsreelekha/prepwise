@@ -3,749 +3,1317 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PrepWise AI</title>
+<title>PrepWise AI</title>
 
-    <style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body{
-            margin:0;
-            font-family:Arial, sans-serif;
-            background:#07072d;
-            color:white;
-        }
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        nav{
-            background:#11113b;
-            padding:20px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-        }
+<style>
 
-        nav h1{
-            margin:0;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-        .nav-buttons button{
-            background:#8b5cf6;
-            border:none;
-            padding:10px 18px;
-            color:white;
-            border-radius:8px;
-            margin-left:10px;
-            cursor:pointer;
-        }
+body{
+background:linear-gradient(135deg,#14001f,#2b0046,#12001d);
+color:white;
+overflow-x:hidden;
+}
 
-        .container{
-            padding:30px;
-        }
+body::before{
+content:"";
+position:fixed;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#ff4fd833,transparent 70%);
+top:-250px;
+left:-200px;
+z-index:-1;
+}
 
-        .section{
-            background:#11113b;
-            padding:25px;
-            border-radius:15px;
-            margin-bottom:30px;
-        }
+body::after{
+content:"";
+position:fixed;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#5a8cff33,transparent 70%);
+bottom:-250px;
+right:-200px;
+z-index:-1;
+}
 
-        h2{
-            margin-top:0;
-        }
+nav{
+width:100%;
+padding:25px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#090012;
+border-bottom:1px solid rgba(255,255,255,0.08);
+position:sticky;
+top:0;
+z-index:1000;
+}
 
-        button{
-            background:#8b5cf6;
-            border:none;
-            padding:12px 20px;
-            color:white;
-            border-radius:8px;
-            cursor:pointer;
-            margin-top:10px;
-        }
+.logo{
+font-size:44px;
+font-weight:800;
+background:linear-gradient(90deg,#ff63d8,#7a8cff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 
-        textarea{
-            width:100%;
-            height:120px;
-            border-radius:10px;
-            padding:10px;
-            margin-top:10px;
-        }
+.nav-links{
+display:flex;
+gap:34px;
+flex-wrap:wrap;
+}
 
-        select{
-            padding:10px;
-            border-radius:8px;
-        }
+.nav-links a{
+text-decoration:none;
+color:#f1e8ff;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+}
 
-        .question-box{
-            background:#23235d;
-            padding:15px;
-            border-radius:10px;
-            margin-top:15px;
-        }
+.nav-links a:hover{
+color:#ff63d8;
+}
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            margin-top:20px;
-        }
+.page{
+display:none;
+padding:45px;
+}
 
-        table, th, td{
-            border:1px solid #444;
-        }
+.active-page{
+display:block;
+}
 
-        th, td{
-            padding:12px;
-            text-align:left;
-        }
+.hero{
+width:92%;
+margin:auto;
+padding:55px;
+border-radius:36px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+box-shadow:0 0 45px rgba(255,0,255,0.12);
+}
 
-        .graph-container{
-            margin-top:20px;
-        }
+.hero h1{
+font-size:72px;
+line-height:1.1;
+font-weight:800;
+margin-bottom:25px;
+background:linear-gradient(90deg,#ffe6ff,#d3b4ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 
-        .bar{
-            margin-bottom:20px;
-        }
+.subtitle{
+font-size:22px;
+color:#e7ddff;
+margin-bottom:25px;
+}
 
-        .bar label{
-            display:block;
-            margin-bottom:8px;
-            font-weight:bold;
-        }
+input,
+textarea,
+select{
+width:100%;
+padding:22px;
+margin-top:18px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.05);
+color:white;
+font-size:18px;
+outline:none;
+}
 
-        .progress{
-            width:100%;
-            background:#2a2a5a;
-            border-radius:10px;
-            overflow:hidden;
-            height:30px;
-        }
+textarea{
+resize:none;
+min-height:180px;
+}
 
-        .progress-fill{
-            height:100%;
-            background:linear-gradient(90deg,#7b5cff,#a855f7);
-            text-align:center;
-            line-height:30px;
-            color:white;
-            font-weight:bold;
-        }
+select option{
+background:#2d1144;
+}
 
-    </style>
+button{
+padding:18px 38px;
+margin-top:25px;
+border:none;
+border-radius:18px;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+color:white;
+background:linear-gradient(90deg,#ff4fd8,#5a8cff);
+box-shadow:0 0 20px rgba(255,0,255,0.2);
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+.hidden{
+display:none;
+}
+
+.login-box{
+max-width:650px;
+margin:auto;
+margin-top:70px;
+padding:50px;
+border-radius:35px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+text-align:center;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+margin-top:40px;
+}
+
+.card{
+padding:35px;
+border-radius:28px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.card h3{
+font-size:18px;
+margin-bottom:15px;
+color:#e7ddff;
+}
+
+.card p{
+font-size:58px;
+font-weight:800;
+color:#ff63d8;
+}
+
+.section-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+margin-top:35px;
+}
+
+.skill-box{
+padding:35px;
+border-radius:28px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.skill-box h2{
+font-size:34px;
+margin-bottom:25px;
+}
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.skill{
+padding:12px 20px;
+border-radius:40px;
+font-size:17px;
+font-weight:700;
+}
+
+.green{
+background:rgba(50,255,160,0.12);
+color:#89ffc6;
+}
+
+.orange{
+background:rgba(255,180,0,0.12);
+color:#ffc266;
+}
+
+.chart-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+margin-top:40px;
+}
+
+.chart-card{
+padding:30px;
+border-radius:28px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.chart-card h2{
+margin-bottom:25px;
+}
+
+.question-box{
+margin-top:30px;
+padding:35px;
+border-radius:28px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.question-box h3{
+font-size:34px;
+margin-bottom:20px;
+}
+
+.question-box p{
+font-size:25px;
+line-height:1.8;
+}
+
+.summary-box{
+margin-top:30px;
+padding:35px;
+border-radius:28px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+font-size:20px;
+line-height:1.9;
+}
+
+.ai-resume{
+margin-top:35px;
+padding:35px;
+border-radius:28px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.score{
+margin-top:20px;
+font-size:28px;
+font-weight:700;
+color:#89ffc6;
+}
+
+.roadmap-day{
+margin-top:25px;
+padding:30px;
+border-radius:24px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.roadmap-day h3{
+font-size:28px;
+margin-bottom:15px;
+color:#ff63d8;
+}
+
+.roadmap-day p{
+font-size:20px;
+line-height:1.8;
+}
+
+.resource-link{
+display:inline-block;
+margin-top:18px;
+color:#7ab6ff;
+font-size:18px;
+font-weight:700;
+}
+
+@media(max-width:1000px){
+
+.hero h1{
+font-size:48px;
+}
+
+.stats-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.chart-grid,
+.section-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <nav>
+<!-- LOGIN PAGE -->
 
-        <h1>PrepWise AI</h1>
+<div id="loginPage" class="page active-page">
 
-        <div class="nav-buttons">
+<div class="login-box">
 
-            <button onclick="showCandidate()">
-                Candidate
-            </button>
+<h1 style="font-size:65px;margin-bottom:20px;">
+PrepWise AI
+</h1>
 
-            <button onclick="showRecruiter()">
-                Recruiter
-            </button>
+<p class="subtitle">
+AI Powered Career Preparation Platform
+</p>
 
-        </div>
+<select id="userRole">
 
-    </nav>
+<option>Student</option>
+<option>Recruiter</option>
 
-    <!-- CANDIDATE SECTION -->
+</select>
 
-    <div class="container" id="candidateSection">
+<input
+type="email"
+id="email"
+placeholder="Enter Email"
+/>
 
-        <!-- INTRO -->
+<input
+type="password"
+id="password"
+placeholder="Enter Password"
+/>
 
-        <div class="section">
+<button onclick="loginUser()">
+Login
+</button>
 
-            <h1>
-                Know Your Real Skill Level Before the Interview
-            </h1>
+</div>
 
-            <p>
+</div>
 
-                AI-powered platform for resume analysis,
-                job description matching,
-                adaptive interviews,
-                coding tests,
-                automated candidate scoring,
-                and recruiter analytics.
+<!-- MAIN APP -->
 
-            </p>
+<div id="mainApp" class="hidden">
 
-        </div>
+<nav>
 
-        <!-- RESUME -->
+<div class="logo">
+PrepWise AI
+</div>
 
-        <div class="section">
+<div class="nav-links">
 
-            <h2>1. Upload Resume</h2>
+<a onclick="showPage('dashboard')">Dashboard</a>
+<a onclick="showPage('analytics')">Analytics</a>
+<a onclick="showPage('interview')">Interview</a>
+<a onclick="showPage('coding')">Coding</a>
+<a onclick="showPage('roadmap')">Roadmap</a>
+<a onclick="showPage('linkedin')">LinkedIn AI</a>
 
-            <input type="file" id="resume">
+</div>
 
-            <br>
+</nav>
 
-            <button onclick="analyzeResume()">
-                Analyze Resume
-            </button>
+<!-- DASHBOARD -->
 
-            <h3 id="skills"></h3>
+<div id="dashboard" class="page active-page">
 
-        </div>
+<div class="hero">
 
-        <!-- JOB DESCRIPTION -->
+<h1>Resume Analysis Dashboard</h1>
 
-        <div class="section">
+<p class="subtitle">
+Upload Resume and Compare with Job Description
+</p>
 
-            <h2>2. Job Description Matching</h2>
+<input type="file" id="resumeFile">
 
-            <textarea
-                id="jobDescription"
-                placeholder="Paste Job Description here..."
-            ></textarea>
+<textarea
+id="jobDescription"
+placeholder="Paste Job Description here..."
+></textarea>
 
-            <br>
+<button onclick="analyzeResume()">
+Analyze Resume
+</button>
 
-            <button onclick="matchJobDescription()">
-                Match Resume with JD
-            </button>
+<div id="dashboardResult" class="hidden">
 
-            <h3 id="matchResult"></h3>
+<div class="stats-grid">
 
-            <div id="missingSkills"></div>
+<div class="card">
+<h3>ATS SCORE</h3>
+<p>85</p>
+</div>
 
-        </div>
+<div class="card">
+<h3>JD MATCH</h3>
+<p>78%</p>
+</div>
 
-        <!-- AI INTERVIEW -->
+<div class="card">
+<h3>READINESS</h3>
+<p>90</p>
+</div>
 
-        <div class="section">
+<div class="card">
+<h3>AUTHENTICITY</h3>
+<p>88</p>
+</div>
 
-            <h2>3. AI Mock Interview</h2>
+</div>
 
-            <select id="difficulty">
+<div class="section-grid">
 
-                <option>Beginner</option>
-                <option>Medium</option>
-                <option>Expert</option>
+<div class="skill-box">
 
-            </select>
+<h2>Matched Skills</h2>
 
-            <br>
+<div class="skills">
 
-            <button onclick="generateQuestions()">
-                Generate Questions
-            </button>
+<div class="skill green">Python</div>
+<div class="skill green">SQL</div>
+<div class="skill green">DBMS</div>
+<div class="skill green">FastAPI</div>
+<div class="skill green">Machine Learning</div>
 
-            <div id="questions"></div>
+</div>
 
-        </div>
+</div>
 
-        <!-- ANSWER -->
+<div class="skill-box">
 
-        <div class="section">
+<h2>Missing Skills</h2>
 
-            <h2>4. Submit Interview Answer</h2>
+<div class="skills" id="missingSkills">
 
-            <textarea
-                id="answer"
-                placeholder="Type your answer here..."
-            ></textarea>
+<div class="skill orange">React.js</div>
+<div class="skill orange">Cloud</div>
+<div class="skill orange">Docker</div>
+<div class="skill orange">REST APIs</div>
 
-            <br>
+</div>
 
-            <button onclick="evaluateAnswer()">
-                Evaluate Answer
-            </button>
+</div>
 
-            <h3 id="score"></h3>
+</div>
 
-        </div>
+</div>
 
-        <!-- CODING TEST -->
+</div>
 
-        <div class="section">
+</div>
 
-            <h2>5. Online Coding Skill Test</h2>
+<!-- ANALYTICS -->
 
-            <select id="codingDifficulty">
+<div id="analytics" class="page">
 
-                <option>Beginner</option>
-                <option>Medium</option>
-                <option>Expert</option>
+<div class="hero">
 
-            </select>
+<h1>Performance Analytics</h1>
 
-            <br>
+<div id="analyticsContent" class="hidden">
 
-            <button onclick="generateCodingQuestion()">
-                Start Coding Test
-            </button>
+<div class="chart-grid">
 
-            <div id="codingQuestion"></div>
+<div class="chart-card">
 
-            <textarea
-                placeholder="Write your code here..."
-            ></textarea>
+<h2>Skill Distribution</h2>
 
-            <br>
+<canvas id="pieChart"></canvas>
 
-            <button onclick="submitCodingTest()">
-                Submit Coding Test
-            </button>
+</div>
 
-        </div>
+<div class="chart-card">
 
-        <!-- ANALYTICS -->
+<h2>Performance Overview</h2>
 
-        <div class="section">
+<canvas id="barChart"></canvas>
 
-            <h2>6. Interview Performance Analytics</h2>
+</div>
 
-            <table>
+</div>
 
-                <tr>
+</div>
 
-                    <th>Skill Area</th>
-                    <th>Performance</th>
+<div id="analyticsEmpty">
 
-                </tr>
+<div class="summary-box">
+Upload and analyze resume first to view analytics charts.
+</div>
 
-                <tr>
+</div>
 
-                    <td>Technical Skills</td>
-                    <td>88%</td>
+</div>
 
-                </tr>
+</div>
 
-                <tr>
+<!-- INTERVIEW -->
 
-                    <td>Communication</td>
-                    <td>79%</td>
+<div id="interview" class="page">
 
-                </tr>
+<div class="hero">
 
-                <tr>
+<h1>AI Mock Interview</h1>
 
-                    <td>Problem Solving</td>
-                    <td>91%</td>
+<select id="difficultyLevel">
 
-                </tr>
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
 
-                <tr>
+</select>
 
-                    <td>Confidence</td>
-                    <td>83%</td>
+<button onclick="startInterview()">
+Start Interview
+</button>
 
-                </tr>
+<div id="interviewContainer"></div>
 
-            </table>
+</div>
 
-        </div>
+</div>
 
-        <!-- GRAPH -->
+<!-- CODING -->
 
-        <div class="section">
+<div id="coding" class="page">
 
-            <h2>7. Performance Graph</h2>
+<div class="hero">
 
-            <div class="graph-container">
+<h1>Coding Assessment</h1>
 
-                <div class="bar">
+<select id="codingLevel">
 
-                    <label>Technical Skills</label>
+<option>Easy</option>
+<option>Medium</option>
+<option>Hard</option>
 
-                    <div class="progress">
+</select>
 
-                        <div class="progress-fill"
-                            style="width:88%">
+<button onclick="generateCodingQuestion()">
+Generate Coding Question
+</button>
 
-                            88%
+<div class="question-box">
 
-                        </div>
+<h3>Coding Question</h3>
 
-                    </div>
+<p id="codingQuestion">
+Click generate coding question
+</p>
 
-                </div>
+</div>
 
-                <div class="bar">
+<textarea
+id="codingAnswer"
+placeholder="Write your code here..."
+style="height:240px;font-family:Consolas;"
+></textarea>
 
-                    <label>Communication</label>
+<button onclick="submitCode()">
+Submit Code
+</button>
 
-                    <div class="progress">
+<div class="score" id="codingFeedback"></div>
 
-                        <div class="progress-fill"
-                            style="width:79%">
+</div>
 
-                            79%
+</div>
 
-                        </div>
+<!-- ROADMAP -->
 
-                    </div>
+<div id="roadmap" class="page">
 
-                </div>
+<div class="hero">
 
-                <div class="bar">
+<h1>AI Daily Roadmap Planner</h1>
 
-                    <label>Problem Solving</label>
+<p class="subtitle">
+Select deadline and available study time
+</p>
 
-                    <div class="progress">
+<input type="date" id="deadline">
 
-                        <div class="progress-fill"
-                            style="width:91%">
+<select id="studyHours">
 
-                            91%
+<option>1 Hour Daily</option>
+<option>2 Hours Daily</option>
+<option>3 Hours Daily</option>
+<option>4 Hours Daily</option>
 
-                        </div>
+</select>
 
-                    </div>
+<button onclick="generateRoadmap()">
+Generate Daily Roadmap
+</button>
 
-                </div>
+<div id="roadmapContent" class="hidden"></div>
 
-                <div class="bar">
+</div>
 
-                    <label>Confidence</label>
+</div>
 
-                    <div class="progress">
+<!-- LINKEDIN -->
 
-                        <div class="progress-fill"
-                            style="width:83%">
+<div id="linkedin" class="page">
 
-                            83%
+<div class="hero">
 
-                        </div>
+<h1>LinkedIn AI Resume Builder</h1>
 
-                    </div>
+<p class="subtitle">
+Paste LinkedIn profile URL and AI will generate professional resume
+</p>
 
-                </div>
+<input
+type="text"
+id="linkedinUrl"
+placeholder="Paste LinkedIn Profile URL"
+/>
 
-            </div>
+<button onclick="trackLinkedInProfile()">
+Track Profile & Generate Resume
+</button>
 
-        </div>
+<div
+id="linkedinLoading"
+class="summary-box hidden"
+>
 
-    </div>
+🔍 Tracking LinkedIn profile...
+<br><br>
 
-    <!-- RECRUITER SECTION -->
+🧠 Analyzing technical activity...
+<br><br>
 
-    <div
-        class="container"
-        id="recruiterSection"
-        style="display:none;"
-    >
+📄 Generating AI Resume...
 
-        <div class="section">
+</div>
 
-            <h2>Recruiter Dashboard</h2>
+<div id="linkedinResults" class="hidden">
 
-            <table>
+<div class="summary-box">
 
-                <tr>
+<h2
+id="candidateName"
+style="
+font-size:42px;
+margin-bottom:25px;
+color:#8bc2ff;
+"
+>
+</h2>
 
-                    <th>Candidate</th>
-                    <th>Skill Match</th>
-                    <th>Status</th>
+<div id="candidateResume"></div>
 
-                </tr>
+</div>
 
-                <tr>
+</div>
 
-                    <td>Rahul</td>
-                    <td>88%</td>
-                    <td>Shortlisted</td>
+</div>
 
-                </tr>
+</div>
 
-                <tr>
+</div>
 
-                    <td>Ananya</td>
-                    <td>76%</td>
-                    <td>Interview Pending</td>
+<script>
 
-                </tr>
+function loginUser(){
 
-                <tr>
+let email =
+document.getElementById("email").value;
 
-                    <td>Kiran</td>
-                    <td>92%</td>
-                    <td>Selected</td>
+let password =
+document.getElementById("password").value;
 
-                </tr>
+if(email==="" || password===""){
 
-            </table>
+alert("Please enter email and password");
+return;
 
-        </div>
+}
 
-    </div>
+document.getElementById("loginPage")
+.classList.remove("active-page");
 
-    <script>
+document.getElementById("mainApp")
+.classList.remove("hidden");
 
-        let extractedSkills = [];
+}
 
-        function analyzeResume(){
+function showPage(pageId){
 
-            extractedSkills = [
+document.querySelectorAll("#mainApp .page")
+.forEach(page=>{
 
-                "Python",
-                "SQL",
-                "DBMS",
-                "FastAPI",
-                "Machine Learning"
+page.classList.remove("active-page");
 
-            ];
+});
 
-            document.getElementById("skills").innerHTML =
+document.getElementById(pageId)
+.classList.add("active-page");
 
-                "Skills Extracted: " +
+}
 
-                extractedSkills.join(", ");
-        }
+function analyzeResume(){
 
-        function matchJobDescription(){
+let file =
+document.getElementById("resumeFile").files.length;
 
-            const jd =
-                document.getElementById("jobDescription")
-                .value
-                .toLowerCase();
+if(file===0){
 
-            if(extractedSkills.length === 0){
+alert("Please upload resume");
+return;
 
-                alert("Please analyze resume first!");
+}
 
-                return;
-            }
+document.getElementById("dashboardResult")
+.classList.remove("hidden");
 
-            let matched = 0;
+document.getElementById("analyticsContent")
+.classList.remove("hidden");
 
-            let missing = [];
+document.getElementById("analyticsEmpty")
+.classList.add("hidden");
 
-            extractedSkills.forEach(skill => {
+createCharts();
 
-                if(jd.includes(skill.toLowerCase())){
+}
 
-                    matched++;
+function generateRoadmap(){
 
-                }
-            });
+let deadline =
+document.getElementById("deadline").value;
 
-            const requiredSkills = [
+if(deadline===""){
 
-                "Python",
-                "SQL",
-                "DBMS",
-                "FastAPI",
-                "Machine Learning",
-                "Java",
-                "React"
+alert("Please select deadline");
+return;
 
-            ];
+}
 
-            requiredSkills.forEach(skill => {
+let roadmap =
+document.getElementById("roadmapContent");
 
-                if(
-                    jd.includes(skill.toLowerCase()) &&
-                    !extractedSkills.includes(skill)
-                ){
+roadmap.classList.remove("hidden");
 
-                    missing.push(skill);
-                }
-            });
+roadmap.innerHTML = `
 
-            let percentage =
-                Math.floor(
-                    (matched / extractedSkills.length) * 100
-                );
+<div class="roadmap-day">
 
-            document.getElementById("matchResult")
-                .innerHTML =
+<h3>DAY 1 → React.js Basics</h3>
 
-                "Resume Match Percentage: " +
+<p>
+Learn Components, JSX and Props
+</p>
 
-                percentage + "%";
+<a
+class="resource-link"
+href="https://react.dev/learn"
+target="_blank"
+>
+Open Resource
+</a>
 
-            document.getElementById("missingSkills")
-                .innerHTML =
+</div>
 
-                "<b>Missing Skills:</b> " +
+<div class="roadmap-day">
 
-                (missing.length > 0
-                    ? missing.join(", ")
-                    : "No major missing skills");
-        }
+<h3>DAY 2 → Docker Fundamentals</h3>
 
-        function generateQuestions(){
+<p>
+Understand Containers and Docker Commands
+</p>
 
-            let difficulty =
-                document.getElementById("difficulty").value;
+<a
+class="resource-link"
+href="https://www.docker.com/101-tutorial/"
+target="_blank"
+>
+Open Resource
+</a>
 
-            let questionDiv =
-                document.getElementById("questions");
+</div>
 
-            questionDiv.innerHTML = "";
+<div class="roadmap-day">
 
-            extractedSkills.forEach(skill => {
+<h3>DAY 3 → REST APIs</h3>
 
-                let question = "";
+<p>
+Learn API creation and integration
+</p>
 
-                if(difficulty === "Beginner"){
+<a
+class="resource-link"
+href="https://fastapi.tiangolo.com/"
+target="_blank"
+>
+Open Resource
+</a>
 
-                    question =
-                    `What is ${skill} and where is it used?`;
+</div>
 
-                }
+<div class="roadmap-day">
 
-                else if(difficulty === "Medium"){
+<h3>DAY 4 → Cloud Basics</h3>
 
-                    question =
-                    `Explain a real-world use case of ${skill}.`;
+<p>
+Learn AWS and deployment concepts
+</p>
 
-                }
+<a
+class="resource-link"
+href="https://aws.amazon.com/getting-started/"
+target="_blank"
+>
+Open Resource
+</a>
 
-                else{
+</div>
 
-                    question =
-                    `Explain advanced concepts and challenges in ${skill}.`;
+<div class="roadmap-day">
 
-                }
+<h3>Recommended Certifications</h3>
 
-                questionDiv.innerHTML += `
+<p>
 
-                    <div class="question-box">
+• Meta Front-End Professional Certificate
+<br><br>
 
-                        <h3>
-                            ${difficulty} Question on ${skill}
-                        </h3>
+• Docker Certified Associate
+<br><br>
 
-                        <p>${question}</p>
+• AWS Cloud Practitioner
 
-                    </div>
+</p>
 
-                `;
-            });
-        }
+<a
+class="resource-link"
+href="https://www.coursera.org/professional-certificates/meta-front-end-developer"
+target="_blank"
+>
+Open Certification
+</a>
 
-        function evaluateAnswer(){
+</div>
 
-            let answer =
-                document.getElementById("answer").value;
+`;
 
-            let score = 0;
+}
 
-            if(answer.length > 20){
+function trackLinkedInProfile(){
 
-                score = 85;
+let url =
+document.getElementById("linkedinUrl").value;
 
-            }
+if(url.trim()===""){
 
-            else{
+alert("Please paste LinkedIn URL");
+return;
 
-                score = 55;
+}
 
-            }
+document.getElementById("linkedinLoading")
+.classList.remove("hidden");
 
-            document.getElementById("score")
-                .innerHTML =
+document.getElementById("linkedinResults")
+.classList.add("hidden");
 
-                "Candidate Score: " +
+let username = "";
 
-                score + "%";
-        }
+if(url.includes("/in/")){
 
-        function generateCodingQuestion(){
+username =
+url.split("/in/")[1];
 
-            let level =
-                document.getElementById("codingDifficulty")
-                .value;
+username =
+username.replace("/", "");
 
-            let codingQuestion =
-                document.getElementById("codingQuestion");
+username =
+username.replace(/[0-9]/g,"");
 
-            if(level === "Beginner"){
+username =
+username.replace(/[^\w\s-]/gi,"");
 
-                codingQuestion.innerHTML =
+}
 
-                `
-                <div class="question-box">
+username =
+username.replaceAll("-", " ");
 
-                    <h3>Beginner Coding Question</h3>
+let formattedName =
+username
+.split(" ")
+.map(word =>
+word.charAt(0).toUpperCase()
++
+word.slice(1)
+)
+.join(" ");
 
-                    <p>
-                        Write a program to reverse a string.
-                    </p>
+setTimeout(()=>{
 
-                </div>
-                `;
-            }
+document.getElementById("linkedinLoading")
+.classList.add("hidden");
 
-            else if(level === "Medium"){
+document.getElementById("linkedinResults")
+.classList.remove("hidden");
 
-                codingQuestion.innerHTML =
+document.getElementById("candidateName")
+.innerHTML =
+formattedName;
 
-                `
-                <div class="question-box">
+document.getElementById("candidateResume")
+.innerHTML = `
 
-                    <h3>Medium Coding Question</h3>
+<div class="ai-resume">
 
-                    <p>
-                        Write a program to find duplicate
-                        elements in an array.
-                    </p>
+<h1 style="
+font-size:52px;
+margin-bottom:10px;
+">
+${formattedName}
+</h1>
 
-                </div>
-                `;
-            }
+<p style="
+font-size:22px;
+color:#8bc2ff;
+margin-bottom:25px;
+">
+AI / Backend Developer
+</p>
 
-            else{
+<hr style="
+border:1px solid rgba(255,255,255,0.1);
+margin-bottom:30px;
+">
 
-                codingQuestion.innerHTML =
+<h2 style="
+margin-bottom:18px;
+color:#ff63d8;
+">
+Professional Summary
+</h2>
 
-                `
-                <div class="question-box">
+<p style="
+line-height:2;
+font-size:18px;
+">
+Computer Science Engineering student passionate about
+AI, Backend Development and Full Stack systems.
+Actively involved in hackathons and technical projects.
+</p>
 
-                    <h3>Expert Coding Question</h3>
+<br>
 
-                    <p>
-                        Implement Dijkstra's Algorithm.
-                    </p>
+<h2 style="
+margin-bottom:18px;
+color:#ff63d8;
+">
+Technical Skills
+</h2>
 
-                </div>
-                `;
-            }
-        }
+<div class="skills">
 
-        function submitCodingTest(){
+<div class="skill green">Python</div>
+<div class="skill green">SQL</div>
+<div class="skill green">FastAPI</div>
+<div class="skill green">Machine Learning</div>
+<div class="skill green">React.js</div>
 
-            alert(
-                "Coding Test Submitted Successfully!"
-            );
-        }
+</div>
 
-        function showRecruiter(){
+<br><br>
 
-            document.getElementById(
-                "candidateSection"
-            ).style.display = "none";
+<h2 style="
+margin-bottom:18px;
+color:#ff63d8;
+">
+Projects
+</h2>
 
-            document.getElementById(
-                "recruiterSection"
-            ).style.display = "block";
-        }
+<ul style="
+padding-left:28px;
+line-height:2.1;
+font-size:18px;
+">
 
-        function showCandidate(){
+<li>AI Resume Analyzer</li>
 
-            document.getElementById(
-                "candidateSection"
-            ).style.display = "block";
+<li>AI Mock Interview Platform</li>
 
-            document.getElementById(
-                "recruiterSection"
-            ).style.display = "none";
-        }
+<li>Analytics Dashboard</li>
 
-    </script>
+</ul>
+
+</div>
+
+`;
+
+},3000);
+
+}
+
+const interviewQuestions = {
+
+Beginner:[
+"What is Python and where is it used?",
+"What is SQL?",
+"What is DBMS?"
+],
+
+Intermediate:[
+"What are joins in SQL?",
+"What is REST API?"
+],
+
+Advanced:[
+"What is JWT Authentication?",
+"What is overfitting?"
+]
+
+};
+
+let currentQuestionIndex = 0;
+let selectedQuestions = [];
+
+function startInterview(){
+
+let level =
+document.getElementById("difficultyLevel").value;
+
+selectedQuestions =
+interviewQuestions[level];
+
+currentQuestionIndex = 0;
+
+showInterviewQuestion();
+
+}
+
+function showInterviewQuestion(){
+
+if(currentQuestionIndex >= selectedQuestions.length){
+
+document.getElementById("interviewContainer")
+.innerHTML = `
+<div class="question-box">
+<h2>Interview Completed Successfully ✅</h2>
+</div>
+`;
+
+return;
+
+}
+
+document.getElementById("interviewContainer")
+.innerHTML = `
+
+<div class="question-box">
+
+<h3>
+Question ${currentQuestionIndex+1}
+</h3>
+
+<p>
+${selectedQuestions[currentQuestionIndex]}
+</p>
+
+<textarea
+id="interviewAnswer"
+placeholder="Write your answer here..."
+></textarea>
+
+<button onclick="submitInterviewAnswer()">
+Submit Answer
+</button>
+
+<div class="score" id="interviewScore"></div>
+
+</div>
+
+`;
+
+}
+
+function submitInterviewAnswer(){
+
+let answer =
+document.getElementById("interviewAnswer").value;
+
+if(answer.trim()===""){
+alert("Please write answer");
+return;
+}
+
+let marks =
+Math.floor(Math.random()*5)+6;
+
+document.getElementById("interviewScore")
+.innerHTML =
+"Answer Submitted • Score: "
++ marks + "/10";
+
+setTimeout(()=>{
+
+currentQuestionIndex++;
+showInterviewQuestion();
+
+},1400);
+
+}
+
+function generateCodingQuestion(){
+
+let level =
+document.getElementById("codingLevel").value;
+
+let questions = [];
+
+if(level==="Easy"){
+
+questions = [
+"Write Python program to reverse string.",
+"Write Fibonacci series program."
+];
+
+}
+else if(level==="Medium"){
+
+questions = [
+"Implement Bubble Sort.",
+"Write factorial using recursion."
+];
+
+}
+else{
+
+questions = [
+"Implement Merge Sort.",
+"Create REST API using FastAPI."
+];
+
+}
+
+let random =
+questions[Math.floor(Math.random()*questions.length)];
+
+document.getElementById("codingQuestion")
+.innerHTML = random;
+
+}
+
+function submitCode(){
+
+let code =
+document.getElementById("codingAnswer").value;
+
+if(code.trim()===""){
+alert("Please write code");
+return;
+}
+
+let score =
+Math.floor(Math.random()*15)+85;
+
+document.getElementById("codingFeedback")
+.innerHTML =
+"Code Submitted Successfully ✅ • Score: "
++ score + "/100";
+
+}
+
+function createCharts(){
+
+new Chart(
+document.getElementById('pieChart'),
+{
+type:'pie',
+data:{
+labels:[
+'Python',
+'SQL',
+'Machine Learning',
+'Web Development'
+],
+datasets:[{
+data:[35,20,25,20],
+backgroundColor:[
+'#ff61d8',
+'#7b8cff',
+'#59f1ff',
+'#74f0a4'
+]
+}]
+}
+}
+);
+
+new Chart(
+document.getElementById('barChart'),
+{
+type:'bar',
+data:{
+labels:[
+'Technical',
+'Communication',
+'Problem Solving',
+'Coding'
+],
+datasets:[{
+label:'Performance',
+data:[90,75,95,85],
+backgroundColor:[
+'#ff61d8',
+'#7b8cff',
+'#59f1ff',
+'#74f0a4'
+]
+}]
+}
+}
+);
+
+}
+
+</script>
 
 </body>
-
 </html>
