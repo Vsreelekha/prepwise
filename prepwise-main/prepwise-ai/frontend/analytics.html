@@ -1,20 +1,399 @@
-<!-- Analytics dashboard placeholder (Phase 1). Phase 2 will add Chart.js graphs. -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Analytics - PrepWise AI</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <main class="container">
-      <h1>Analytics</h1>
-      <p>Phase 2 will render charts for performance trends and weak areas.</p>
-    </main>
 
-    <script src="js/auth.js"></script>
-    <script src="js/charts.js"></script>
-  </body>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PrepWise Analytics</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#020617;
+    color:white;
+    font-family:Arial;
+    padding:40px;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.score{
+    font-size:48px;
+    color:#38bdf8;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+.skill-card{
+    background:#111827;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:25px;
+    border-left:5px solid #3b82f6;
+}
+
+.skill-card h3{
+    margin-bottom:15px;
+}
+
+p{
+    margin-bottom:10px;
+    line-height:1.6;
+}
+
+.resource{
+    margin-top:10px;
+}
+
+a{
+    color:#22c55e;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    background:#2563eb;
+    margin-left:10px;
+    font-size:14px;
+}
+.chart-section{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+    margin-top:40px;
+}
+
+.chart-card{
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+canvas{
+    margin-top:20px;
+}
+
+.insight-box{
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+    margin-top:40px;
+    border-left:5px solid #38bdf8;
+}
+
+.insight-box h2{
+    margin-bottom:20px;
+}
+
+.insight-box p{
+    line-height:1.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>AI Analytics Dashboard</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Overall Score</h2>
+        <div class="score">85%</div>
+    </div>
+
+    <div class="card">
+        <h2>Readiness Score</h2>
+        <div class="score">78%</div>
+    </div>
+
+    <div class="card">
+        <h2>Authenticity Score</h2>
+        <div class="score">90%</div>
+    </div>
+
+</div>
+
+<h2 style="margin-bottom:20px;">
+    Skill Insights
+</h2>
+
+<div class="skill-card">
+
+    <h3>
+        Python
+        <span class="badge">Intermediate</span>
+    </h3>
+
+    <p>
+        <b>Claimed Level:</b>
+        Expert
+    </p>
+
+    <p>
+        <b>Tested Level:</b>
+        Intermediate
+    </p>
+
+    <p>
+        <b>Improvement Needed:</b>
+        Practice APIs, OOP concepts, and scalable backend systems.
+    </p>
+
+    <p>
+        <b>Recommended Project:</b>
+        Build a FastAPI based AI project with authentication and database integration.
+    </p>
+
+    <h4>Learning Resources</h4>
+
+    <div class="resource">
+        <a href="https://roadmap.sh/python" target="_blank">
+            Python Roadmap
+        </a>
+    </div>
+    
+    <div class="resource">
+        <a href="https://fastapi.tiangolo.com/" target="_blank">
+            FastAPI Documentation
+        </a>
+    </div>
+
+</div>
+
+<div class="skill-card">
+
+    <h3>
+        React
+        <span class="badge">Beginner</span>
+    </h3>
+
+    <p>
+        <b>Claimed Level:</b>
+        Intermediate
+    </p>
+
+    <p>
+        <b>Tested Level:</b>
+        Beginner
+    </p>
+
+    <p>
+        <b>Improvement Needed:</b>
+        Work on API integration, hooks, and state management.
+    </p>
+
+    <p>
+        <b>Recommended Project:</b>
+        Create a full-stack React dashboard connected to FastAPI backend.
+    </p>
+
+    <h4>Learning Resources</h4>
+
+    <div class="resource">
+        <a href="https://react.dev/" target="_blank">
+            React Official Docs
+        </a>
+    </div>
+
+    <div class="resource">
+        <a href="https://roadmap.sh/frontend" target="_blank">
+            Frontend Roadmap
+        </a>
+    </div>
+
+</div>
+<div class="chart-section">
+
+    <div class="chart-card">
+        <h2>Skill Performance Graph</h2>
+        <canvas id="skillsChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>Interview Analysis</h2>
+        <canvas id="analysisChart"></canvas>
+    </div>
+
+</div>
+<div class="insight-box">
+
+    <h2>AI Insights</h2>
+
+    <p>
+
+    🧠 Strong backend and API understanding detected.
+
+    <br><br>
+
+    📈 Communication confidence improved during interview.
+
+    <br><br>
+
+    ⚠ React implementation knowledge lower than claimed level.
+
+    <br><br>
+
+    🚀 Candidate shows excellent potential for backend and AI roles.
+
+    <br><br>
+
+    💡 Recommended Focus Areas:
+    React,
+    Deployment,
+    System Design,
+    Cloud Computing.
+
+    </p>
+
+</div>
+
+
+
+<div class="insight-box">
+
+    <h2>Recommended Learning Resources</h2>
+
+    <p>
+
+    ✅ React Official Documentation
+
+    <br><br>
+
+    ✅ FastAPI Backend Development
+
+    <br><br>
+
+    ✅ Docker & Cloud Fundamentals
+
+    <br><br>
+
+    ✅ System Design Roadmap
+
+    <br><br>
+
+    ✅ Full Stack Project Building
+
+    </p>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx1 =
+document.getElementById('skillsChart')
+
+new Chart(ctx1, {
+
+    type:'radar',
+
+    data:{
+
+        labels:[
+            'Python',
+            'React',
+            'ML',
+            'DSA',
+            'System Design'
+        ],
+
+        datasets:[{
+
+            label:'Skill Score',
+
+            data:[85,60,70,65,50],
+
+            borderWidth:3
+
+        }]
+    },
+
+    options:{
+        responsive:true,
+
+        scales:{
+            r:{
+                beginAtZero:true,
+                max:100
+            }
+        }
+    }
+
+})
+
+
+const ctx2 =
+document.getElementById('analysisChart')
+
+new Chart(ctx2, {
+
+    type:'bar',
+
+    data:{
+
+        labels:[
+            'Communication',
+            'Technical',
+            'Problem Solving',
+            'Confidence'
+        ],
+
+        datasets:[{
+
+            label:'Interview Scores',
+
+            data:[75,85,70,80],
+
+            borderWidth:2
+
+        }]
+    },
+
+    options:{
+        responsive:true
+    }
+
+})
+
+</script>
+</body>
 </html>
-

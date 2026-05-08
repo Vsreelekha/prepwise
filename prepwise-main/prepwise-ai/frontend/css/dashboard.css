@@ -3,3 +3,41 @@ Dashboard-specific styles (Phase 1 placeholder).
 Phase 2 will include the sidebar layout and dashboard cards/grid styling.
 */
 
+.analytics-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:30px;
+}
+
+.analytics-card{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.score{
+    font-size:40px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.chart-container{
+    margin-top:40px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+}
+
+.insights-section{
+    margin-top:40px;
+}
+
+.insight-card{
+    margin-top:20px;
+    padding:20px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.06);
+}

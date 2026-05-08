@@ -364,7 +364,30 @@ color:#7ab6ff;
 font-size:18px;
 font-weight:700;
 }
+.candidate-card{
+margin-top:35px;
+padding:35px;
+border-radius:30px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.03)
+);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 0 25px rgba(0,0,0,0.2);
+}
 
+.candidate-card h2{
+font-size:34px;
+margin-bottom:20px;
+color:#ffffff;
+}
+
+.candidate-card p{
+font-size:19px;
+line-height:2;
+color:#f1e8ff;
+}
 @media(max-width:1000px){
 
 .hero h1{
@@ -433,7 +456,7 @@ Login
 
 <div id="mainApp" class="hidden">
 
-<nav>
+<nav id="navbar">
 
 <div class="logo">
 PrepWise AI
@@ -493,12 +516,14 @@ Analyze Resume
 <h3>READINESS</h3>
 <p>90</p>
 </div>
-
-<div class="card">
+ <div class="card">
 <h3>AUTHENTICITY</h3>
-<p>88</p>
-</div>
 
+<p id="authenticityScore">
+Pending
+</p>
+
+</div>
 </div>
 
 <div class="section-grid">
@@ -571,7 +596,79 @@ Analyze Resume
 </div>
 
 </div>
+<div class="summary-box" style="margin-top:40px;">
 
+<h2 style="
+margin-bottom:25px;
+color:#8bc2ff;
+font-size:36px;
+">
+AI Insights
+</h2>
+
+<p style="font-size:20px;line-height:2;">
+
+🧠 Strong backend and API understanding detected.
+
+<br><br>
+
+📈 Communication confidence improved during interview.
+
+<br><br>
+
+⚠ React implementation knowledge lower than claimed level.
+
+<br><br>
+
+🚀 Candidate shows strong potential for backend and AI engineering roles.
+
+<br><br>
+
+💡 Recommended Focus Areas:
+React,
+Deployment,
+System Design,
+Cloud Computing.
+
+</p>
+
+</div>
+
+
+
+<div class="summary-box" style="margin-top:30px;">
+
+<h2 style="
+margin-bottom:25px;
+color:#8bc2ff;
+font-size:36px;
+">
+Recommended Learning Resources
+</h2>
+
+<p style="font-size:20px;line-height:2;">
+
+✅ React Official Documentation
+
+<br><br>
+
+✅ FastAPI Backend Development
+
+<br><br>
+
+✅ Docker & Cloud Fundamentals
+
+<br><br>
+
+✅ System Design Roadmap
+
+<br><br>
+
+✅ Full Stack Project Building
+
+</p>
+
+</div>
 </div>
 
 <div id="analyticsEmpty">
@@ -593,15 +690,13 @@ Upload and analyze resume first to view analytics charts.
 <div class="hero">
 
 <h1>AI Mock Interview</h1>
+<div class="summary-box">
 
-<select id="difficultyLevel">
+AI will automatically determine
+candidate difficulty level
+based on resume analysis.
 
-<option>Beginner</option>
-<option>Intermediate</option>
-<option>Advanced</option>
-
-</select>
-
+</div>
 <button onclick="startInterview()">
 Start Interview
 </button>
@@ -753,7 +848,167 @@ color:#8bc2ff;
 </div>
 
 </div>
+<!-- RECRUITER -->
 
+<div id="recruiter" class="page">
+
+<div class="hero">
+
+<h1>Recruiter Candidate Analysis</h1>
+
+<p class="subtitle">
+AI Based Selection & Hiring Recommendation
+</p>
+
+<div class="candidate-card">
+
+<h2>Shamshitha Tiruveedhula</h2>
+
+<p>
+<b>ATS Score:</b> 92
+</p>
+
+<p>
+<b>Interview Score:</b> 88
+</p>
+
+<p>
+<b>Authenticity Score:</b> 84%
+</p>
+
+<p style="color:#89ffc6;">
+<b>Status:</b> Selected
+</p>
+
+<p>
+<b>Why Selected:</b>
+Strong backend knowledge,
+excellent API understanding,
+good communication skills,
+and high learning potential.
+</p>
+
+<p>
+<b>Strengths:</b>
+Python,
+FastAPI,
+Machine Learning,
+API Integration
+</p>
+
+<p>
+<b>Weak Areas:</b>
+React architecture,
+deployment workflows
+</p>
+
+<p>
+<b>Recommendation:</b>
+Proceed to technical round.
+</p>
+
+</div>
+
+
+
+<div class="candidate-card">
+
+<h2>Rahul Sharma</h2>
+
+<p>
+<b>ATS Score:</b> 67
+</p>
+
+<p>
+<b>Interview Score:</b> 58
+</p>
+
+<p>
+<b>Authenticity Score:</b> 72%
+</p>
+
+<p style="color:#ff8f8f;">
+<b>Status:</b> Rejected
+</p>
+
+<p>
+<b>Why Rejected:</b>
+Weak technical fundamentals
+and low problem-solving confidence.
+</p>
+
+<p>
+<b>Strengths:</b>
+HTML,
+CSS,
+Basic SQL
+</p>
+
+<p>
+<b>Weak Areas:</b>
+Backend,
+DSA,
+API development
+</p>
+
+<p>
+<b>Recommendation:</b>
+Needs improvement before next round.
+</p>
+
+</div>
+
+
+
+<div class="candidate-card">
+
+<h2>Ananya Reddy</h2>
+
+<p>
+<b>ATS Score:</b> 88
+</p>
+
+<p>
+<b>Interview Score:</b> 82
+</p>
+
+<p>
+<b>Authenticity Score:</b> 90%
+</p>
+
+<p style="color:#89ffc6;">
+<b>Status:</b> Selected
+</p>
+
+<p>
+<b>Why Selected:</b>
+Excellent consistency between resume
+and interview performance.
+</p>
+
+<p>
+<b>Strengths:</b>
+Cloud,
+Python,
+Docker,
+DBMS
+</p>
+
+<p>
+<b>Weak Areas:</b>
+Frontend frameworks
+</p>
+
+<p>
+<b>Recommendation:</b>
+Strong candidate for backend roles.
+</p>
+
+</div>
+
+</div>
+
+</div>
 <script>
 
 function loginUser(){
@@ -763,6 +1018,9 @@ document.getElementById("email").value;
 
 let password =
 document.getElementById("password").value;
+
+let role =
+document.getElementById("userRole").value;
 
 if(email==="" || password===""){
 
@@ -776,6 +1034,39 @@ document.getElementById("loginPage")
 
 document.getElementById("mainApp")
 .classList.remove("hidden");
+
+if(role==="Recruiter"){
+
+document.getElementById("navbar")
+.style.display = "none";
+
+document.querySelectorAll("#mainApp .page")
+.forEach(page=>{
+
+page.classList.remove("active-page");
+
+});
+
+document.getElementById("recruiter")
+.classList.add("active-page");
+
+}
+else{
+
+document.getElementById("navbar")
+.style.display = "flex";
+
+document.querySelectorAll("#mainApp .page")
+.forEach(page=>{
+
+page.classList.remove("active-page");
+
+});
+
+document.getElementById("dashboard")
+.classList.add("active-page");
+
+}
 
 }
 
@@ -1094,19 +1385,48 @@ font-size:18px;
 const interviewQuestions = {
 
 Beginner:[
+
 "What is Python and where is it used?",
 "What is SQL?",
-"What is DBMS?"
+"What is DBMS?",
+"What is HTML?",
+"What is CSS?",
+"What is JavaScript?",
+"What are APIs?",
+"What is Git?",
+"What is debugging?",
+"What is cloud computing?"
+
 ],
 
 Intermediate:[
+
 "What are joins in SQL?",
-"What is REST API?"
+"What is REST API?",
+"What are React hooks?",
+"What is JWT authentication?",
+"What is normalization?",
+"What is asynchronous programming?",
+"What is FastAPI?",
+"What are Docker containers?",
+"What is state management?",
+"What is API integration?"
+
 ],
 
 Advanced:[
-"What is JWT Authentication?",
-"What is overfitting?"
+
+"Explain system design for scalable applications.",
+"What is overfitting in ML?",
+"Explain microservices architecture.",
+"What are race conditions?",
+"What is CI/CD?",
+"What is Kubernetes?",
+"What is load balancing?",
+"What is database indexing?",
+"What are design patterns?",
+"What is caching in backend systems?"
+
 ]
 
 };
@@ -1116,8 +1436,20 @@ let selectedQuestions = [];
 
 function startInterview(){
 
-let level =
-document.getElementById("difficultyLevel").value;
+let atsScore = 85;
+
+let level = "Intermediate";
+
+if(atsScore >= 90){
+
+level = "Advanced";
+
+}
+else if(atsScore <= 60){
+
+level = "Beginner";
+
+}
 
 selectedQuestions =
 interviewQuestions[level];
@@ -1131,12 +1463,178 @@ showInterviewQuestion();
 function showInterviewQuestion(){
 
 if(currentQuestionIndex >= selectedQuestions.length){
+   let auth =
+document.getElementById("authenticityScore");
+
+auth.innerHTML = "84%";
+
+auth.style.color = "#89ffc6";
 
 document.getElementById("interviewContainer")
 .innerHTML = `
-<div class="question-box">
-<h2>Interview Completed Successfully ✅</h2>
+
+<div class="summary-box">
+
+<h1 style="
+font-size:50px;
+margin-bottom:25px;
+color:#89ffc6;
+">
+AI Interview Analysis
+</h1>
+
+<p>
+
+✅ Overall Interview Score:
+<b>84/100</b>
+
+<br><br>
+
+✅ Communication Score:
+<b>78%</b>
+
+<br><br>
+
+✅ Technical Score:
+<b>88%</b>
+
+<br><br>
+
+✅ Problem Solving:
+<b>82%</b>
+
+<br><br>
+
+✅ Confidence Level:
+<b>80%</b>
+
+</p>
+
 </div>
+
+<div class="section-grid">
+
+<div class="skill-box">
+
+<h2>Claimed vs Actual Skills</h2>
+
+<p>
+
+<b>Python:</b>
+Claimed Expert →
+Detected Intermediate
+
+<br><br>
+
+<b>React:</b>
+Claimed Intermediate →
+Detected Beginner
+
+<br><br>
+
+<b>Machine Learning:</b>
+Claimed Intermediate →
+Detected Intermediate
+
+</p>
+
+</div>
+
+<div class="skill-box">
+
+<h2>Weak Areas Detected</h2>
+
+<p>
+
+• API Integration
+
+<br><br>
+
+• React State Management
+
+<br><br>
+
+• System Design
+
+<br><br>
+
+• Backend Optimization
+
+</p>
+
+</div>
+
+</div>
+
+<div class="chart-grid">
+
+<div class="chart-card">
+
+<h2>Recommended Courses</h2>
+
+<p>
+
+<a
+class="resource-link"
+href="https://react.dev/learn"
+target="_blank"
+>
+React Official Course
+</a>
+
+<br><br>
+
+<a
+class="resource-link"
+href="https://roadmap.sh/backend"
+target="_blank"
+>
+Backend Developer Roadmap
+</a>
+
+<br><br>
+
+<a
+class="resource-link"
+href="https://fastapi.tiangolo.com/"
+target="_blank"
+>
+FastAPI Documentation
+</a>
+
+</p>
+
+</div>
+
+<div class="chart-card">
+
+<h2>AI Resume Suggestions</h2>
+
+<p>
+
+❌ Avoid claiming:
+"Expert in React"
+
+<br><br>
+
+✅ Better Resume Line:
+
+"Built frontend applications using React and API integration."
+
+<br><br>
+
+✅ Add more backend projects
+
+<br><br>
+
+✅ Add Docker & Cloud experience
+
+</p>
+
+</div>
+
+</div>
+
 `;
 
 return;
@@ -1185,7 +1683,18 @@ return;
 
 let marks =
 Math.floor(Math.random()*5)+6;
+if(marks >= 9){
 
+selectedQuestions =
+interviewQuestions["Advanced"];
+
+}
+else if(marks <= 6){
+
+selectedQuestions =
+interviewQuestions["Beginner"];
+
+}
 document.getElementById("interviewScore")
 .innerHTML =
 "Answer Submitted • Score: "
